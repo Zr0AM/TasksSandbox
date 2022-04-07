@@ -1,5 +1,5 @@
 <?php
-namespace www;
+namespace tasks;
 
 session_start();
 
