@@ -1,5 +1,5 @@
 <?php
-namespace www\util;
+namespace util;
 
 class Database
 {

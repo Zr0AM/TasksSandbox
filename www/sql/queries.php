@@ -1,5 +1,5 @@
 <?php
-namespace www\sql;
+namespace sql;
 
 require_once 'sql/connect.php';
 

@@ -1,4 +1,4 @@
-<?php namespace www\test; session_start();?>
+<?php namespace test; session_start();?>
 <!DOCTYPE html>
 <html>
 

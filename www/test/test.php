@@ -9,11 +9,11 @@
  $db->runQuery("SELECT * FROM tbl_tasks;");
  
  */
-namespace www\test;
+namespace test;
 
-use www\util;
-require_once '../util/Constant.php';
-echo util\Constant::HTMLHead();
+use util;
+use html\htmlwrapper;
+echo htmlwrapper::writeHeader($_SERVER["PHP_SELF"]);
 
 require_once '../util/Dropdown.php';
 
@@ -31,7 +31,7 @@ $objDropdown->setOnChange("Test");
 
 echo $objDropdown->getHTML();
 
-echo util\Constant::HTMLFooter();
+echo htmlwrapper::writeFooter();
 
 // use www\html;
 // require_once '../html/html.php';

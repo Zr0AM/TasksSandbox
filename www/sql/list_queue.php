@@ -1,5 +1,5 @@
 <?php
-namespace www\sql;
+namespace sql;
 
 if (session_status() != PHP_SESSION_ACTIVE)
 {

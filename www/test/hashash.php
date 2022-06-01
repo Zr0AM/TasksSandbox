@@ -1,5 +1,5 @@
 <?php
-namespace www\test;
+namespace test;
 
 session_start();
 

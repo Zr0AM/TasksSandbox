@@ -1,5 +1,5 @@
 <?php
-namespace www\html;
+namespace html;
 
 define("crLfTab", "");
 define("activeClass", ' class="active"');

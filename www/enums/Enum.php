@@ -1,5 +1,5 @@
 <?php
-namespace www\enums;
+namespace enums;
 
 abstract class Enum
 {

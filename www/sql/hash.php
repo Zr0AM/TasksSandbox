@@ -1,5 +1,5 @@
 <?php
-namespace www\sql;
+namespace sql;
 
 function getHash($value)
 {

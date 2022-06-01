@@ -1,5 +1,4 @@
 <?php
-namespace www;
 
 session_start();
 

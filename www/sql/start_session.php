@@ -1,4 +1,4 @@
 <?php
-namespace www\sql;
+namespace sql;
 
 ?>
