@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 
 require_once 'html/htmlwrapper.php';
@@ -41,7 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     if ($loginStatus)
     {
       
-      \header('Location: task_queue.php');
+      header('Location: task_queue.php');
+      exit;
     }
     elseif ($loginStatus == 'inactive')
     {

@@ -40,6 +40,8 @@ if (isset($completeID) && ! empty($completeID))
   unset($completeID);
   
   header('Location: queue_info.php');
+  
+  exit;
 }
 
 $query = 'SELECT * FROM view_queue_info WHERE queue_id = "' . $queueId . '"';

@@ -37,6 +37,7 @@ if (isset($viewItem) && ! empty($viewItem))
   $_SESSION['viewQueueItem'] = $viewItem;
   unset($viewItem);
   header('Location: queue_info.php');
+  exit;
 }
 elseif (isset($completeItem) && ! empty($completeItem))
 {
@@ -44,6 +45,7 @@ elseif (isset($completeItem) && ! empty($completeItem))
   $_SESSION['completeQueueItem'] = $completeItem;
   unset($completeItem);
   header('Location: queue_info.php');
+  exit;
 }
 
 if (! isset($taskId) || empty($taskId))

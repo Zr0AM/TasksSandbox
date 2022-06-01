@@ -26,5 +26,7 @@ $_SESSION['errorMsg'] = "You have successfully logged out";
 
 header('Location: login.php');
 
-$objHtml::writeFooter();
+exit;
+
+// $objHtml::writeFooter();
 ?>

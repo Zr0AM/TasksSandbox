@@ -99,6 +99,7 @@ class htmlwrapper
       $_SESSION['errorMsg'] = "Your session has expired";
       
       header('Location: ../login.php');
+      exit;
     }
     else if (isset($_SESSION['userid']))
     {
