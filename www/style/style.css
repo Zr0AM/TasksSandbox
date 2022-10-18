@@ -15,7 +15,7 @@ textarea {
 }
 
 input.display, textarea.display {
-	font-family: Verdana;
+	font-family: Verdana, sans-serif;
 	/*border: 1px solid #000000;*/
 }
 
@@ -56,12 +56,12 @@ div.smallhead {
 
 select {
 	margin: 0px;
-	font-family: Verdana;
+	font-family: Verdana, sans-serif;
 }
 
 body {
 	margin: 0;
-	font-family: verdana;
+	font-family: verdana, sans-serif;
 }
 
 div.main {
