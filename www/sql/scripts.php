@@ -116,7 +116,7 @@ function processLogon($username, $password)
     if (! $result = $conn->query($sql)) {
 
         $conn->close();
-        
+
         add_log($username, 'Login issue');
         return false;
     }
@@ -151,15 +151,16 @@ function add_log($user, $action)
 
     $sql = 'CALL add_log("' . $user . '","' . $action . '")';
 
-    if ($result = $conn->query($sql)) {
+    if (! $result = $conn->query($sql)) {
 
+        $result->free();
         $conn->close();
-
-        return true;
-    } else {
 
         return false;
     }
 
     $result->free();
+    $conn->close();
+
+    return true;
 }
