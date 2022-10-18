@@ -6,7 +6,7 @@ require_once 'html/htmlwrapper.php';
 $objHtml = new html\htmlwrapper();
 $objHtml::writeHeader($_SERVER["PHP_SELF"]);
 
-echo '<span> Welcome to Team Omnomnom\'s Tasks application.</span><br> <br>';
+echo '<div> Welcome to Team Omnomnom\'s Tasks application.</div><br> <br>';
 
 /*
  * echo print_r($_SESSION);
