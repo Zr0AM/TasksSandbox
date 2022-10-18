@@ -62,7 +62,6 @@ function updateLastActivity()
 function processLogon($username, $password)
 {
     require_once 'connect.php';
-    $success = false;
 
     $conn = connectDB();
 
@@ -71,7 +70,7 @@ function processLogon($username, $password)
 
         add_log($username, 'Login connection error');
 
-        goto label_exit;
+        return false;
     }
 
     add_log($username, 'Login attempt');
@@ -93,7 +92,7 @@ function processLogon($username, $password)
 
         add_log($username, 'Login user does not exist');
 
-        goto label_exit;
+        return false;
     }
 
     $stmt->fetch();
@@ -102,40 +101,36 @@ function processLogon($username, $password)
 
         add_log($username, 'Login user inactive');
 
-        goto label_exit;
+        return false;
     }
 
-    if (password_verify($password, $user['password'])) {
-
-        // update user last login
-        $sql = 'UPDATE tbl_user SET user_last_sign_on = NOW()  WHERE user_id = "' . $user['id'] . '"';
-
-        if ($result = $conn->query($sql)) {
-
-            $conn->close();
-
-            $_SESSION['userid'] = $user['id'];
-            $_SESSION['username'] = $user['name'];
-
-            add_log($username, 'Login success');
-
-            $success = true;
-            goto label_exit;
-        } else {
-
-            add_log($username, 'Login issue');
-
-            goto label_exit;
-        }
-
-        $result->free();
-    } else {
+    if (! password_verify($password, $user['password'])) {
 
         add_log($username, 'Login wrong password');
+        return false;
     }
 
-    label_exit:
-    return $success;
+    // update user last login
+    $sql = 'UPDATE tbl_user SET user_last_sign_on = NOW()  WHERE user_id = "' . $user['id'] . '"';
+
+    if (! $result = $conn->query($sql)) {
+
+        $conn->close();
+        
+        add_log($username, 'Login issue');
+        return false;
+    }
+
+    $conn->close();
+
+    $_SESSION['userid'] = $user['id'];
+    $_SESSION['username'] = $user['name'];
+
+    add_log($username, 'Login success');
+
+    $result->free();
+
+    return true;
 }
 
 function add_log($user, $action)
