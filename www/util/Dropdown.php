@@ -18,68 +18,68 @@ class Dropdown
 
     private int $iDefaultOption;
 
-    function getDefaultOption()
+    public function getDefaultOption()
     {
         return $this->iDefaultOption;
     }
 
-    function setDefaultOption($iDefaultOption)
+    public function setDefaultOption($iDefaultOption)
     {
         $this->iDefaultOption = $iDefaultOption;
     }
 
-    function getObjName(): string
+    public function getObjName(): string
     {
         return $this->strObjName;
     }
 
-    function getId(): string
+    public function getId(): string
     {
         return $this->strId;
     }
 
-    function getOnChange(): string
+    public function getOnChange(): string
     {
         return $this->strOnChange;
     }
 
-    function setObjName($strObjName)
+    public function setObjName($strObjName)
     {
         $this->strObjName = $strObjName;
     }
 
-    function setId($strId)
+    public function setId($strId)
     {
         $this->strId = $strId;
     }
 
-    function setOnChange($strOnChange)
+    public function setOnChange($strOnChange)
     {
         $this->strOnChange = $strOnChange;
     }
 
-    function addOptions($arrayIn): void
+    public function addOptions($arrayIn): void
     {
         $this->strOptions = $arrayIn;
         $this->iSize = count($arrayIn);
     }
 
-    function size(): int
+    public function size(): int
     {
         return $this->iSize;
     }
 
-    function setDisplayName(string $strIn): void
+    public function setDisplayName(string $strIn): void
     {
         $this->strDisplayName = $strIn;
     }
 
-    function getDisplayName(): string
+    public function getDisplayName(): string
     {
         return $this->strDisplayName;
     }
 
-    function getHTML(): string
+    public function getHTML(): string
     {
         $strOutput = "<form>" . $this->strDisplayName . "&nbsp;<select name=" . '"' . $this->strObjName . '"' . " ";
         $strOutput = $strOutput . "onchange=" . '"' . $this->strOnChange . '"' . " id=" . '"' . $this->strId . '"' . ">";
