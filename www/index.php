@@ -8,11 +8,6 @@ $objHtml::writeHeader($_SERVER["PHP_SELF"]);
 
 echo '<div> Welcome to Team Omnomnom\'s Tasks application.</div><br> <br>';
 
-/*
- * echo print_r($_SESSION);
- * 
- */
-
 $objHtml::writeFooter();
 
 ?>

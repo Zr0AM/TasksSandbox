@@ -4,20 +4,18 @@ namespace enums;
 abstract class DaysOfWeek extends Enum
 {
   
-  const Sunday = 0;
+  const SUNDAY = 0;
   
-  const Monday = 1;
+  const MONDAY = 1;
   
-  const Tuesday = 2;
+  const TUESDAY = 2;
   
-  const Wednesday = 3;
+  const WEDNESDAY = 3;
   
-  const Thursday = 4;
+  const THURSDAY = 4;
   
-  const Friday = 5;
+  const FRIDAY = 5;
   
-  const Saturday = 6;
+  const SATURDAY = 6;
   
 }
-
-?>
