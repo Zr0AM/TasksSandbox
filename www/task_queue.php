@@ -1,15 +1,13 @@
 <?php
-
 session_start();
 
 require_once 'html/htmlwrapper.php';
 $objHtml = new html\htmlwrapper();
 $objHtml::writeHeader($_SERVER["PHP_SELF"]);
 
-if (! isset($_SESSION['userid']))
-{
-  
-  die('You must be logged in to view this page.');
+if (! isset($_SESSION['userid'])) {
+
+    die('You must be logged in to view this page.');
 }
 
 require_once 'sql/scripts.php';
@@ -18,10 +16,10 @@ require_once 'util/Dropdown.php';
 $objDropdown = new util\Dropdown();
 
 $objDropdown->addOptions(Array(
-  "Outstanding",
-  "Complete",
-  "Upcoming",
-  "All"
+    "Outstanding",
+    "Complete",
+    "Upcoming",
+    "All"
 ));
 
 $objDropdown->setDisplayName("Queue Status");
