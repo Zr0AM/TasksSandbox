@@ -4,11 +4,11 @@ namespace enums;
 abstract class Enum
 {
 
-    private static $constCacheArray = NULL;
+    private static $constCacheArray = null;
 
     private static function getConstants()
     {
-        if (self::$constCacheArray == NULL) {
+        if (self::$constCacheArray == null) {
             self::$constCacheArray = [];
         }
         $calledClass = get_called_class();
