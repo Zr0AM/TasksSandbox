@@ -1,15 +1,13 @@
 <?php
-
 session_start();
 
 require_once 'html/htmlwrapper.php';
 $objHtml = new html\htmlwrapper();
 $objHtml::writeHeader($_SERVER["PHP_SELF"]);
 
-if (! isset($_SESSION['userid']))
-{
-  
-  die('You must be logged in to view this page.');
+if (! isset($_SESSION['userid'])) {
+
+    die('You must be logged in to view this page.');
 }
 
 require_once 'sql/scripts.php';
@@ -26,4 +24,4 @@ $_SESSION['errorMsg'] = "You have successfully logged out";
 
 header('Location: login.php');
 
-exit;
+exit();

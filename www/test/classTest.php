@@ -10,61 +10,56 @@
 
 class classTest
 {
-  
-  private $recurType;
-  
-  private $recurSepCount;
-  
-  private $recurDayOfWeek;
-  
-  private $recurWeekOfMonth;
-  
-  private $recurDayOfMonth;
-  
-  private $recurMonthOfYear;
-  
-  private $sepMax;
-  
-  const sepCountWeekly = 51;
-  
-  const sepCountMonthly = 11;
-  
-  const sepCountAnnually = 1;
-  
-  public function setRecurrenceType($type)
-  {
-    
-    $this->recurType = $type;
-    
-    switch ($type)
+
+    private $recurType;
+
+    private $recurSepCount;
+
+    private $recurDayOfWeek;
+
+    private $recurWeekOfMonth;
+
+    private $recurDayOfMonth;
+
+    private $recurMonthOfYear;
+
+    private $sepMax;
+
+    const sepCountWeekly = 51;
+
+    const sepCountMonthly = 11;
+
+    const sepCountAnnually = 1;
+
+    public function setRecurrenceType($type)
     {
-      case 1:
-        $sepMax = sepCountWeekly;
-        
-        break;
-      case 2:
-        $sepMax = sepCountMonthly;
-        
-        break;
-      case 3:
-        $sepMax = sepCountAnnually;
-        
-        break;
-      default:
-        // do nothing
-        break;
+        $this->recurType = $type;
+
+        switch ($type) {
+            case 1:
+                $sepMax = sepCountWeekly;
+
+                break;
+            case 2:
+                $sepMax = sepCountMonthly;
+
+                break;
+            case 3:
+                $sepMax = sepCountAnnually;
+
+                break;
+            default:
+                // do nothing
+                break;
+        }
+
+        $recurSepCount = array();
+        for ($i = 1; $i <= $sepMax; $i ++) {
+            $recurSepCount = $i;
+        }
+
+        echo print_r($recurSepCount);
     }
-    
-    $recurSepCount = array();
-    for ($i = 1; $i <= $sepMax; $i ++)
-    {
-      $recurSepCount = $i;
-    }
-    
-    echo print_r($recurSepCount);
-    
-  }
-  
 }
 
 $something = new classTest();

@@ -1,13 +1,13 @@
 <?php
 
 /**
- 
+
  require_once 'util/Database.php';
- 
+
  $db = new Database();
- 
+
  $db->runQuery("SELECT * FROM tbl_tasks;");
- 
+
  */
 namespace test;
 
@@ -20,8 +20,8 @@ require_once '../util/Dropdown.php';
 $objDropdown = new util\Dropdown();
 
 $objDropdown->addOptions(Array(
-  "By",
-  "To"
+    "By",
+    "To"
 ));
 
 $objDropdown->setDisplayName("Test");

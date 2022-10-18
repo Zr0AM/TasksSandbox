@@ -26,6 +26,7 @@ td.display, th.display {
 	padding-bottom: 8px; 
 	padding-top: 8px;
 	text-align: left;*/
+	
 }
 
 tr.list:nth-child(even) {
@@ -36,6 +37,7 @@ tr.list:nth-child(even) {
 	/*border-collapse: collapse;
 	border-color: white;
 	border: none;*/
+	
 }
 
 thead {
