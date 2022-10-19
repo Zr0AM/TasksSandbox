@@ -1,11 +1,12 @@
 <?php
 namespace html;
 
-define("crLfTab", "");
-define("activeClass", ' class="active"');
-
 class htmlwrapper
 {
+
+    private const crLfTab = "";
+
+    private const activeClass = ' class="active"';
 
     public static function writeHeader($current_page)
     {
