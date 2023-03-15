@@ -52,7 +52,6 @@ function updateLastActivity()
         $_SESSION['errorMsg'] = "Your session has expired";
 
         header('Location: ../login.php');
-        exit();
     } else if (isset($_SESSION['userid'])) {
 
         $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
@@ -61,7 +60,7 @@ function updateLastActivity()
 
 function processLogon($username, $password)
 {
-    require_once 'connect.php';
+    $success = false;
 
     $conn = connectDB();
 
@@ -70,7 +69,7 @@ function processLogon($username, $password)
 
         add_log($username, 'Login connection error');
 
-        return false;
+        goto label_exit;
     }
 
     add_log($username, 'Login attempt');
@@ -92,7 +91,7 @@ function processLogon($username, $password)
 
         add_log($username, 'Login user does not exist');
 
-        return false;
+        goto label_exit;
     }
 
     $stmt->fetch();
@@ -101,42 +100,44 @@ function processLogon($username, $password)
 
         add_log($username, 'Login user inactive');
 
-        return false;
+        goto label_exit;
     }
 
-    if (! password_verify($password, $user['password'])) {
+    if (password_verify($password, $user['password'])) {
+
+        // update user last login
+        $sql = 'UPDATE tbl_user SET user_last_sign_on = NOW()  WHERE user_id = "' . $user['id'] . '"';
+
+        if ($result = $conn->query($sql)) {
+
+            $conn->close();
+
+            $_SESSION['userid'] = $user['id'];
+            $_SESSION['username'] = $user['name'];
+
+            add_log($username, 'Login success');
+
+            $success = true;
+            goto label_exit;
+        } else {
+
+            add_log($username, 'Login issue');
+
+            goto label_exit;
+        }
+
+        $result->free();
+    } else {
 
         add_log($username, 'Login wrong password');
-        return false;
     }
 
-    // update user last login
-    $sql = 'UPDATE tbl_user SET user_last_sign_on = NOW()  WHERE user_id = "' . $user['id'] . '"';
-
-    if (! $result = $conn->query($sql)) {
-
-        $conn->close();
-
-        add_log($username, 'Login issue');
-        return false;
-    }
-
-    $conn->close();
-
-    $_SESSION['userid'] = $user['id'];
-    $_SESSION['username'] = $user['name'];
-
-    add_log($username, 'Login success');
-
-    $result->free();
-
-    return true;
+    label_exit:
+    return $success;
 }
 
 function add_log($user, $action)
 {
-    require_once 'connect.php';
-
     $conn = connectDB();
 
     if ($conn->connect_error) {
@@ -151,16 +152,27 @@ function add_log($user, $action)
 
     $sql = 'CALL add_log("' . $user . '","' . $action . '")';
 
-    if (! $result = $conn->query($sql)) {
+    if ($result = $conn->query($sql)) {
 
-        $result->free();
         $conn->close();
+
+        return true;
+    } else {
 
         return false;
     }
 
     $result->free();
-    $conn->close();
-
-    return true;
 }
+
+function connectDB()
+{
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/util/Config.php";
+
+    // require $temp;
+    require \util\Config::configFile("Connect.php");
+
+    return mysqli_connect($db_hostname, $db_username, $db_password, $db_database);
+}
+
+?>
