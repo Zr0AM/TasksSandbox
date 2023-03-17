@@ -103,12 +103,16 @@ function processLogon($username, $password)
 
     if (! $user['active']) {
 
+        $conn->close();
+
         add_log($username, 'Login user inactive');
 
         return $success;
     }
 
     if (! password_verify($password, $user['password'])) {
+
+        $conn->close();
 
         add_log($username, 'Login wrong password');
 
@@ -120,16 +124,14 @@ function processLogon($username, $password)
 
     $result = $conn->query($sql);
 
+    $conn->close();
+
     if (! $result) {
-        
-        $conn->close();
 
         add_log($username, 'Login issue');
 
         return $success;
     }
-    
-    $conn->close();
 
     $_SESSION['userid'] = $user['id'];
     $_SESSION['username'] = $user['name'];
@@ -156,17 +158,11 @@ function add_log($user, $action)
 
     $sql = 'CALL add_log("' . $user . '","' . $action . '")';
 
-    if ($result = $conn->query($sql)) {
+    $result = $conn->query($sql);
 
-        $conn->close();
+    $conn->close();
 
-        return true;
-    } else {
-
-        return false;
-    }
-
-    $result->free();
+    return $result;
 }
 
 function connectDB()
