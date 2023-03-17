@@ -41,21 +41,26 @@ function updateLastActivity()
 {
     define("TIMEOUT", 600);
 
-    if (isset($_SESSION['userid']) && isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > TIMEOUT)) {
+    if (! isset($_SESSION['userid']) || ! isset($_SESSION['LAST_ACTIVITY'])) {
 
-        add_log($_SESSION['userid'], 'Session expired');
+        return;
+    }
 
-        session_unset();
-        session_destroy();
-        session_start();
-
-        $_SESSION['errorMsg'] = "Your session has expired";
-
-        header('Location: ../login.php');
-    } else if (isset($_SESSION['userid'])) {
+    if ((time() - $_SESSION['LAST_ACTIVITY'] <= TIMEOUT)) {
 
         $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
+        return;
     }
+
+    add_log($_SESSION['userid'], 'Session expired');
+
+    session_unset();
+    session_destroy();
+    session_start();
+
+    $_SESSION['errorMsg'] = "Your session has expired";
+
+    header('Location: ../login.php');
 }
 
 function processLogon($username, $password)
@@ -69,7 +74,7 @@ function processLogon($username, $password)
 
         add_log($username, 'Login connection error');
 
-        goto label_exit;
+        return $success;
     }
 
     add_log($username, 'Login attempt');
@@ -91,7 +96,7 @@ function processLogon($username, $password)
 
         add_log($username, 'Login user does not exist');
 
-        goto label_exit;
+        return $success;
     }
 
     $stmt->fetch();
@@ -100,39 +105,38 @@ function processLogon($username, $password)
 
         add_log($username, 'Login user inactive');
 
-        goto label_exit;
+        return $success;
     }
 
-    if (password_verify($password, $user['password'])) {
-
-        // update user last login
-        $sql = 'UPDATE tbl_user SET user_last_sign_on = NOW()  WHERE user_id = "' . $user['id'] . '"';
-
-        if ($result = $conn->query($sql)) {
-
-            $conn->close();
-
-            $_SESSION['userid'] = $user['id'];
-            $_SESSION['username'] = $user['name'];
-
-            add_log($username, 'Login success');
-
-            $success = true;
-            goto label_exit;
-        } else {
-
-            add_log($username, 'Login issue');
-
-            goto label_exit;
-        }
-
-        $result->free();
-    } else {
+    if (! password_verify($password, $user['password'])) {
 
         add_log($username, 'Login wrong password');
+
+        return $success;
     }
 
-    label_exit:
+    // update user last login
+    $sql = 'UPDATE tbl_user SET user_last_sign_on = NOW()  WHERE user_id = "' . $user['id'] . '"';
+
+    $result = $conn->query($sql);
+
+    if (! $result) {
+        
+        $conn->close();
+
+        add_log($username, 'Login issue');
+
+        return $success;
+    }
+    
+    $conn->close();
+
+    $_SESSION['userid'] = $user['id'];
+    $_SESSION['username'] = $user['name'];
+
+    add_log($username, 'Login success');
+
+    $success = true;
     return $success;
 }
 
