@@ -3,7 +3,7 @@ session_start();
 
 require_once 'html/htmlwrapper.php';
 $objHtml = new html\htmlwrapper();
-$objHtml::writeHeader($_SERVER["PHP_SELF"]);
+$objHtml->writeHeader($_SERVER["PHP_SELF"]);
 
 if (! isset($_SESSION['userid'])) {
 
@@ -12,7 +12,7 @@ if (! isset($_SESSION['userid'])) {
 
 require_once 'sql/scripts.php';
 
-sql\add_log($_SESSION['userid'], 'Logout');
+sql\scripts::add_log($_SESSION['userid'], 'Logout');
 
 session_unset();
 

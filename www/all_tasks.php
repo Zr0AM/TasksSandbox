@@ -1,9 +1,11 @@
 <?php
 session_start();
 
-require_once 'html/htmlwrapper.php';
-$objHtml = new html\htmlwrapper();
-$objHtml::writeHeader($_SERVER["PHP_SELF"]);
+use html\htmlwrapper;
+use util\Dropdown;
+
+$objHtml = new htmlwrapper;
+$objHtml->writeHeader($_SERVER["PHP_SELF"]);
 
 unset($_POST);
 
@@ -12,12 +14,9 @@ if (! isset($_SESSION['userid'])) {
     die('You must be logged in to view this page.');
 }
 
-require_once 'sql/scripts.php';
-require_once 'util/Dropdown.php';
+$objDropdown = new Dropdown();
 
-$objDropdown = new util\Dropdown();
-
-$objDropdown->addOptions(Array(
+$objDropdown->addOptions(array(
     "Active",
     "Inactive",
     "All"
@@ -33,6 +32,6 @@ echo $objDropdown->getHTML();
 
 require_once 'sql/list_tasks.php';
 
-$objHtml::writeFooter();
+$objHtml->writeFooter();
 
 ?>

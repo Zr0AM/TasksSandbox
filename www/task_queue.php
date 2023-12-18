@@ -1,9 +1,8 @@
 <?php
 session_start();
 
-require_once 'html/htmlwrapper.php';
 $objHtml = new html\htmlwrapper();
-$objHtml::writeHeader($_SERVER["PHP_SELF"]);
+$objHtml->writeHeader($_SERVER["PHP_SELF"]);
 
 if (! isset($_SESSION['userid'])) {
 
@@ -32,5 +31,5 @@ echo $objDropdown->getHTML();
 
 require_once 'sql/list_queue.php';
 
-$objHtml::writeFooter();
+$objHtml->writeFooter();
 ?>
