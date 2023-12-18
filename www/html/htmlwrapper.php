@@ -85,7 +85,7 @@ namespace html
 
                 header('Location: ../login.php');
                 exit();
-            } else if (isset($_SESSION['userid'])) {
+            } elseif (isset($_SESSION['userid'])) {
 
                 $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
             }
@@ -96,10 +96,6 @@ namespace html
         {
             echo '<!DOCTYPE html>' . "\r\n";
             echo '<html lang="en">' . "\r\n";
-
-            // header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-            // header("Cache-Control: post-check=0, pre-check=0", false);
-            // header("Pragma: no-cache");
 
             echo '<head>' . "\r\n";
             echo "\t" . '<meta charset="UTF-8">' . "\r\n";
