@@ -6,7 +6,7 @@ abstract class scripts
     
     private const TIMEOUT = 600;
 
-    static function getPostVar($var)
+    public static function getPostVar($var)
     {
         if (isset($_POST[$var])) {
 
@@ -17,7 +17,7 @@ abstract class scripts
         }
     }
 
-    static function getSessVar($var)
+    public static function getSessVar($var)
     {
         if (isset($_SESSION[$var])) {
 
@@ -32,17 +32,17 @@ abstract class scripts
         }
     }
 
-    function getFormattedDate($value)
+    public function getFormattedDate($value)
     {
         return date('n/j/Y g:i:s A', strtotime($value));
     }
 
-    function alert($var)
+    public function alert($var)
     {
         echo "<script type='text/javascript'>alert(" . $var . ");</script>";
     }
 
-    function updateLastActivity()
+    public function updateLastActivity()
     {
 
         if (! isset($_SESSION['userid']) || ! isset($_SESSION['LAST_ACTIVITY'])) {
@@ -67,7 +67,7 @@ abstract class scripts
         header('Location: ../login.php');
     }
 
-    static function processLogon($username, $password)
+    public static function processLogon($username, $password)
     {
         $success = false;
 
@@ -169,7 +169,7 @@ abstract class scripts
         return $result;
     }
 
-    static function connectDB()
+    public static function connectDB()
     {
         require_once $_SERVER['DOCUMENT_ROOT'] . "/util/Config.php";
 

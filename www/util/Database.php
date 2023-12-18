@@ -13,14 +13,14 @@ class Database
     private $queryResult;
 
     private $errorMessage;
-
+/***
     private function connect(): void
     {
         $this->databaseConnection = null;
 
         $this->databaseConnection = mysqli_connect($db_hostname, $db_username, $db_password, $db_database);
     }
-
+ 
     public function runQuery(string $querySql)
     {
         unset($this->queryResult);
@@ -59,7 +59,7 @@ class Database
     {
         return $this->queryResult;
     }
-
+*/
     private function setErrorMessage($errMsg): void
     {
         $this->errorMessage = $errMsg;
