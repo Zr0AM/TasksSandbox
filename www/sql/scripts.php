@@ -174,7 +174,7 @@ abstract class scripts
         require_once $_SERVER['DOCUMENT_ROOT'] . "/util/Config.php";
 
         // require $temp;
-        require \util\Config::configFile("Connect.php");
+        require_once \util\Config::configFile("Connect.php");
 
         return mysqli_connect($db_hostname, $db_username, $db_password, $db_database);
     }

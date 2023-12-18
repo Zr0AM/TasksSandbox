@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once 'html/htmlwrapper.php';
+use html\htmlwrapper;
 $objHtml = new html\htmlwrapper();
 $objHtml->writeHeader($_SERVER["PHP_SELF"]);
 

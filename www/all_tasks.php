@@ -30,8 +30,6 @@ $objDropdown->setDefaultOption(2);
 
 echo $objDropdown->getHTML();
 
-require_once 'sql/list_tasks.php';
+use sql\list_tasks;
 
 $objHtml->writeFooter();
-
-?>
